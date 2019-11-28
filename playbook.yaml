@@ -48,15 +48,13 @@
       shell: make
       
     - name: Make check
-      path: /gromacs-2019.3/build
-      shell: make check
+      shell: /gromacs-2019.3/build/make check
       
     - name: install
-      path: /gromacs-2019.3/build
-      shell: sudo make install
+      shell: /gromacs-2019.3/build/sudo make install
       
     - name: set compiler
-      shell: sudo cmake .. -DCMAKE_C_COMPILER=gcc
+      shell: /gromacs-2019.3/build/sudo cmake .. -DCMAKE_C_COMPILER=gcc
     
     - name: make source
       shell: source /usr/local/gromacs/bin/GMXRC
