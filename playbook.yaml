@@ -15,6 +15,7 @@
           - automake
           - cmake
           - libfftw3-dev
+          - unzip
         state: present
         update_cache: yes 
     - name: Create a directory Downloads
