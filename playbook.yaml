@@ -40,12 +40,10 @@
     - apt: update_cache=yes
     
     - name: Setup environment variables 
-      path: /gromacs-2019.3/build
-      shell: cmake .. -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
+      shell: /gromacs-2019.3/build/cmake .. -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
     
-    - name: Make files
-      path: /gromacs-2019.3/build
-      shell: make
+    - name: Make file
+      shell: /gromacs-2019.3/build/make
       
     - name: Make check
       shell: /gromacs-2019.3/build/make check
