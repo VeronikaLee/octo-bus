@@ -45,19 +45,29 @@
     - apt: update_cache=yes
     
     - name: Setup environment variables 
-      shell: /gromacs-2019.3/build/cmake .. -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
+      shell: 
+        chdir: /gromacs-2019.3/build/
+        cmd: cmake .. -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
     
     - name: Make file
-      shell: /gromacs-2019.3/build/make
+      shell: 
+        chdir: /gromacs-2019.3/build/
+        cmd: make
       
     - name: Make check
-      shell: /gromacs-2019.3/build/make check
+      shell: 
+        chdir: /gromacs-2019.3/build/
+        cmd: make check
       
     - name: install
-      shell: /gromacs-2019.3/build/sudo make install
+      shell: 
+        chdir: /gromacs-2019.3/build/
+        cmd: sudo make install
       
     - name: set compiler
-      shell: /gromacs-2019.3/build/sudo cmake .. -DCMAKE_C_COMPILER=gcc
+      shell: 
+        chdir: /gromacs-2019.3/build/
+        cmd: sudo cmake .. -DCMAKE_C_COMPILER=gcc
     
     - name: make source
       shell: source /usr/local/gromacs/bin/GMXRC
