@@ -1,0 +1,62 @@
+---
+- hosts: 127.0.0.1
+  become: true
+  tasks:  
+    - apt: update_cache=yes  
+    
+    - name: Install a list of packages
+      apt:
+        name:
+          - build-essential
+          - manpages-dev
+          - gdb
+          - bison
+          - autoconf
+          - automake
+          - cmake
+          - libfftw3-dev
+        state: present
+        update_cache: yes 
+    - name: Create a directory Downloads
+      file:
+        path: Downloads
+        state: directory
+        mode: '0755'
+    - name: Download Gromacs
+      get_url:
+        url: http://ftp.gromacs.org/pub/gromacs/gromacs-2019.3.tar.gz
+        dest: /Downloads
+        mode: '0440'        
+    - name: Extract gromacs-2019.3.tar.gz into root
+      unarchive:
+        src: /Downloads/gromacs-2019.3.tar.gz
+        dest: /gromacs-2019.3   
+    - name: Create a directory build
+      file:
+        path: /gromacs-2019.3/build
+        state: directory
+        mode: '0755'
+        
+    - apt: update_cache=yes
+    
+    - name: Setup environment variables 
+      shell: cmake .. -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
+    
+    - name: Make files
+      shell: make
+      
+    - name: Make check
+      shell: make check
+      
+    - name: install
+      shell: sudo make install
+    
+    - name: install
+      shell: source /usr/local/gromacs/bin/GMXRC
+    
+    - name: set compiler
+      shell: sudo cmake .. -DCMAKE_C_COMPILER=gcc
+      
+    - name: start version
+      shell: gmx pdb2gmx --version
+    
