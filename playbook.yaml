@@ -28,7 +28,7 @@
         dest: /Downloads
         mode: '0440' 
      - name: Create a directory gromacs-2019.3
-      file:
+       file:
         path: /gromacs-2019.3
         state: directory
         mode: '0755'
