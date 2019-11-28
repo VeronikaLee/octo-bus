@@ -19,7 +19,7 @@
         update_cache: yes 
     - name: Create a directory Downloads
       file:
-        path: Downloads
+        path: /Downloads
         state: directory
         mode: '0755'
     - name: Download Gromacs
@@ -40,22 +40,26 @@
     - apt: update_cache=yes
     
     - name: Setup environment variables 
+      path: /gromacs-2019.3/build
       shell: cmake .. -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
     
     - name: Make files
+      path: /gromacs-2019.3/build
       shell: make
       
     - name: Make check
+      path: /gromacs-2019.3/build
       shell: make check
       
     - name: install
+      path: /gromacs-2019.3/build
       shell: sudo make install
-    
-    - name: install
-      shell: source /usr/local/gromacs/bin/GMXRC
-    
+      
     - name: set compiler
       shell: sudo cmake .. -DCMAKE_C_COMPILER=gcc
+    
+    - name: make source
+      shell: source /usr/local/gromacs/bin/GMXRC
       
     - name: start version
       shell: gmx pdb2gmx --version
