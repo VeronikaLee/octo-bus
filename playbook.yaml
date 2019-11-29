@@ -61,4 +61,3 @@
     
     - name: start version
       shell: source /usr/local/gromacs/bin/GMXRC; gmx pdb2gmx --version
-	  
