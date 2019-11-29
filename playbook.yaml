@@ -15,7 +15,7 @@
           - automake
           - cmake
           - libfftw3-dev
-          - unzip
+          - gtar
         state: present
         update_cache: yes 
     - name: Create a directory gromacs-2019.3
