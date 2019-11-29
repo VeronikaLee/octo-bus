@@ -18,25 +18,18 @@
           - unzip
         state: present
         update_cache: yes 
-    - name: Create a directory Downloads
-      file:
-        path: /Downloads
-        state: directory
-        mode: '0755'
-    - name: Download Gromacs
-      get_url:
-        url: http://ftp.gromacs.org/pub/gromacs/gromacs-2019.3.tar.gz
-        dest: /tmp/gromacs-2019.3.tar.gz
-        mode: '0440' 
     - name: Create a directory gromacs-2019.3
       file:
         path: gromacs-2019.3
         state: directory
         mode: '0755'
-    - name: Extract gromacs-2019.3.tar.gz into root
+        
+    - name: Unarchive a gromacs file that needs to be downloaded 
       unarchive:
-        src: /tmp/gromacs-2019.3.tar.gz
-        dest: gromacs-2019.3   
+        src: http://ftp.gromacs.org/pub/gromacs/gromacs-2019.3.tar.gz
+        dest: gromacs-2019.3
+        remote_src: yes
+    
     - name: Create a directory build
       file:
         path: gromacs-2019.3/build
