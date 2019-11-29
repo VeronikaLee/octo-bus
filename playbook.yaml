@@ -18,21 +18,17 @@
 
         state: present
         update_cache: yes 
-    - name: Create a directory gromacs-2019.3
-      file:
-        path: gromacs-2019.3
-        state: directory
-        mode: '0755'
+    
         
     - name: Unarchive a gromacs file that needs to be downloaded 
       unarchive:
         src: http://ftp.gromacs.org/pub/gromacs/gromacs-2019.3.tar.gz
-        dest: /home/codio/workspace/gromacs-2019.3
+        dest: /home/codio/workspace/
         remote_src: yes
     
     - name: Create a directory build
       file:
-        path: gromacs-2019.3/build
+        path: /home/codio/workspace/gromacs-2019.3/build
         state: directory
         mode: '0755'
         
@@ -40,27 +36,27 @@
     
     - name: Setup environment variables 
       shell: 
-        chdir: gromacs-2019.3/build/
+        chdir: /home/codio/workspace/gromacs-2019.3/build/
         cmd: cmake .. -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
     
     - name: Make file
       shell: 
-        chdir: gromacs-2019.3/build/
+        chdir: /home/codio/workspace/gromacs-2019.3/build/
         cmd: make
       
     - name: Make check
       shell: 
-        chdir: gromacs-2019.3/build/
+        chdir: /home/codio/workspace/gromacs-2019.3/build/
         cmd: make check
       
     - name: install
       shell: 
-        chdir: gromacs-2019.3/build/
+        chdir: /home/codio/workspace/gromacs-2019.3/build/
         cmd: sudo make install
       
     - name: set compiler
       shell: 
-        chdir: gromacs-2019.3/build/
+        chdir: /home/codio/workspace/gromacs-2019.3/build/
         cmd: sudo cmake .. -DCMAKE_C_COMPILER=gcc
     
     - name: make source
