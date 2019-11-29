@@ -27,7 +27,7 @@
     - name: Unarchive a gromacs file that needs to be downloaded 
       unarchive:
         src: http://ftp.gromacs.org/pub/gromacs/gromacs-2019.3.tar.gz
-        dest: gromacs-2019.3
+        dest: /home/codio/workspace/gromacs-2019.3
         remote_src: yes
     
     - name: Create a directory build
