@@ -60,7 +60,9 @@
         cmd: sudo cmake .. -DCMAKE_C_COMPILER=gcc
     
     - name: make source
-      shell: source /usr/local/gromacs/bin/GMXRC
+      shell: 
+      chdir: /home/codio/workspace/
+      cmd: source /usr/local/gromacs/bin/GMXRC
       
     - name: start version
       shell: gmx pdb2gmx --version
