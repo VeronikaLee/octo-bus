@@ -59,11 +59,6 @@
         chdir: /home/codio/workspace/gromacs-2019.3/build/
         cmd: sudo cmake .. -DCMAKE_C_COMPILER=gcc
     
-    - name: make source
-      shell: 
-        chdir: /
-        cmd: source /usr/local/gromacs/bin/GMXRC
-      
     - name: start version
-      shell: gmx pdb2gmx --version
-    
+      shell: source /usr/local/gromacs/bin/GMXRC; gmx pdb2gmx --version
+	  
