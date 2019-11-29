@@ -61,7 +61,7 @@
     
     - name: make source
       shell: 
-        chdir: /home/codio/workspace/
+        chdir: /
         cmd: source /usr/local/gromacs/bin/GMXRC
       
     - name: start version
